@@ -245,6 +245,7 @@ GameObject:
   - component: {fileID: 422322730}
   - component: {fileID: 422322729}
   - component: {fileID: 422322728}
+  - component: {fileID: 422322731}
   m_Layer: 0
   m_Name: goal
   m_TagString: Untagged
@@ -331,6 +332,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &422322731
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 422322727}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.5
 --- !u!1 &503606718
 GameObject:
   m_ObjectHideFlags: 0
@@ -666,7 +683,7 @@ GameObject:
   - component: {fileID: 1579130075}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -686,6 +703,11 @@ MonoBehaviour:
   speed: 0
   jump: 0
   isJumping: 0
+  maxHealth: 0
+  currentHealth: 0
+  startPos: {fileID: 0}
+  health1: {fileID: 0}
+  health2: {fileID: 0}
 --- !u!212 &1579130073
 SpriteRenderer:
   m_ObjectHideFlags: 0
