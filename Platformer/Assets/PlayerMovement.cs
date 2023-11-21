@@ -5,90 +5,49 @@ using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
-    //variable
-    public float speed;     //control speed of movement
-    float move;             //control direction of movement
+    //variables for the game
+    float speed;        //determines move speed
+    float move;         //determines direction of movement
 
-    public float jump;
+    float jump;         //determines how high the jump is
+    bool isJumping;     //tracks if object is jumping or not
 
-    public bool isJumping;
+    Rigidbody2D rb;     //place to store the rigidbody of the object
 
-    Rigidbody2D rb;         //store the rigidbody of an object
+    // public Transform startPos
 
-
-    public int maxHealth;       //determines max amount of health the player can have
-    public int currentHealth;   //tracks current health of the player
-
-
-    public Transform startPos;
-
-    public GameObject health1;
-    public GameObject health2;
 
     // Start is called before the first frame update
     void Start()
     {
-        speed = 10f;
-        jump = 400f;
-        rb = GetComponent<Rigidbody2D>();       //get the rigidbody of the object
+        speed = 10f;                        //set speed value to ten
+        jump = 400f;                        //set jump value to 400f
 
-        maxHealth = 3;                  //set max health to two
-        currentHealth = maxHealth;      //set current health to max health
+        rb = GetComponent<Rigidbody2D>();   //store the rb of the object
     }
 
     // Update is called once per frame
     void Update()
     {
-        move = Input.GetAxis("Horizontal");             //when any of the horizontal keys are pressed
-        rb.velocity = new Vector2(speed * move, rb.velocity.y); //change the value of the rb to move
+        //move the player
+        move = Input.GetAxis("Horizontal");                     //set move to read any of the Unity Horizontal keybinds
 
-        if (Input.GetButtonDown("Jump") && !isJumping)
+        rb.velocity = new Vector2(speed * move, rb.velocity.y); //move on the x axis(left or right)
+
+        //single jump limit
+        if (Input.GetButtonDown("Jump") && !isJumping)          //when the Unity Jump keybind is presses and if the object is not already jumping
         {
-            Debug.Log("space");
-            rb.AddForce(new Vector2(rb.velocity.x, jump));
-            isJumping = true;
+            rb.AddForce(new Vector2(rb.velocity.x, jump));     //jump
+            isJumping = true;                                   //set jumping to true
         }
     }
 
+    // Called when a Collision is detected
     void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.CompareTag("Ground"))
+        if (other.gameObject.CompareTag("Ground"))  //if the other object is tag as ground
         {
-            isJumping = false;
-        }
-
-        if (other.gameObject.CompareTag("Respawn"))
-        {
-            TakeDamage(1);
+            isJumping = false;                     //set jumping to false
         }
     }
-
-    void TakeDamage(int amount)
-    {
-        currentHealth -= amount;                        //lower health
-        transform.position = new Vector2(startPos.position.x, startPos.position.y);
-
-        if (currentHealth == 2)
-        {
-            health2.SetActive(false);
-        }
-
-        if (currentHealth == 1)
-        {
-            health1.SetActive(false);
-        }
-
-
-        if (currentHealth <= 0)                         //if health equal zero
-        {
-            SceneManager.LoadScene("GameOver");         //go to GameOver Scene
-
-        }
-    }
-    /*
-        void OnTriggerEnter2D(Collider2D coll)
-        {
-
-        }*/
-
 }
