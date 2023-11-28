@@ -14,7 +14,7 @@ public class PlayerMovement : MonoBehaviour
 
     Rigidbody2D rb;     //place to store the rigidbody of the object
 
-    // public Transform startPos
+   // public Transform startPos
 
 
     // Start is called before the first frame update
@@ -37,7 +37,7 @@ public class PlayerMovement : MonoBehaviour
         //single jump limit
         if (Input.GetButtonDown("Jump") && !isJumping)          //when the Unity Jump keybind is presses and if the object is not already jumping
         {
-            rb.AddForce(new Vector2(rb.velocity.x, jump));     //jump
+            rb.AddForce (new Vector2(rb.velocity.x, jump));     //jump
             isJumping = true;                                   //set jumping to true
         }
     }
@@ -47,7 +47,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Ground"))  //if the other object is tag as ground
         {
-            isJumping = false;                     //set jumping to false
+            isJumping =  false;                     //set jumping to false
         }
     }
 }
